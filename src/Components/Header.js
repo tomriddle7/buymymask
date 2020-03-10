@@ -48,7 +48,7 @@ export default withRouter(({ location: { pathname } }) => (
       </Item>
     </List>
     
-    <Developer href="https://github.com/tomriddle7/needyourmask" target="_blank">
+    <Developer href="https://github.com/tomriddle7/buymymask" target="_blank">
       <FontAwesomeIcon icon={faGithub} size="2x"/>
     </Developer>
   </Header>
