@@ -44,7 +44,7 @@ export default withRouter(({ location: { pathname } }) => (
   <Header>
     <List>
       <Item current={pathname === "/"}>
-        <SLink to="/">Buy Your Mask</SLink>
+        <SLink to="/">Buy My Mask</SLink>
       </Item>
     </List>
     

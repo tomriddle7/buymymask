@@ -4,21 +4,15 @@ import styled from "styled-components";
 import Loader from "../../Components/Loader";
 
 const House = styled.div`
-  margin-top: 70px;
   width: 100%;
   height: 400px;
 `;
 
 const HomePresenter = ({
-    map,
     error,
     loading
   }) => {
-    return loading ? (
-      <Loader />
-    ) : (
-      <House className="Home" id="map"></House>
-    )
+    return <div id="map" style={{ width: "100vw", height: "100vh" }} />
   };
   
   export default HomePresenter;

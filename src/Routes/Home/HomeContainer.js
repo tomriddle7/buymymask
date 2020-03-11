@@ -5,37 +5,39 @@ import HomePresenter from "./HomePresenter";
 export default class extends React.Component {
   state = {
     kakaoMap: null,
+    latitude: 0,
+    longitude: 0,
     error: null,
     loading: true
   };
 
-  componentDidMount() {                                                    
-    const script = document.createElement('script');
-    script.async = true;
-    script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.REACT_APP_KAKAO_API}&autoload=false`;
-    
-    document.head.appendChild(script);
-
-    script.onload = () => {
-      kakao.maps.load(() => {
-          let el = document.getElementById('map');
-          let map = new kakao.maps.Map(el, {
-            center: new kakao.maps.LatLng(33.450701, 126.570667),
-            level: 4
-          });
-          this.setState({
-            kakaoMap: map,
-            loading: false
-          });
+  askForCoords() {
+    navigator.geolocation.getCurrentPosition((position) => {
+      this.setState({
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude
       });
-    };
+    });
+  }
+  
+  componentDidMount() {    
+    this.askForCoords();                                                
+    kakao.maps.load(() => {
+      let el = document.getElementById('map');
+      let map = new kakao.maps.Map(el, {
+        center: new kakao.maps.LatLng(this.state.latitude, this.state.longitude),
+        level: 4
+      });
+      this.setState({
+        loading: false
+      });
+  });
   }
                                                     
   render() {
-    const { kakaoMap, loading, error } = this.state;
+    const { loading, error } = this.state;
     return (
       <HomePresenter
-        map={kakaoMap}
         error={error}
         loading={loading}
       />
