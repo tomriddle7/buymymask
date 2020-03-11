@@ -47,19 +47,19 @@ export default class extends React.Component {
           let imageSrc;
           switch(element.remain_stat) {
             case "plenty":
-              imageSrc = '../../Assets/marker_green.png';
+              imageSrc = require("../../Assets/marker_green.png");
               break;
             case "some":
-              imageSrc = '../../../Assets/marker_yellow.png';
+              imageSrc = require("../../Assets/marker_yellow.png");
               break;
             case "few":
-              imageSrc = 'http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png';
+              imageSrc = require("../../Assets/marker_red.png");
               break;
             case "empty":
-              imageSrc = '../../../../public/logo192.png';
+              imageSrc = require("../../Assets/marker_grey.png");
               break;
             default:
-                imageSrc = '../public/logo192.png';
+                imageSrc = require("../../Assets/marker_grey.png");
                 break;
           }
           let imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
