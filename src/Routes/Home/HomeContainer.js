@@ -18,15 +18,15 @@ export default class extends React.Component {
         latitude: position.coords.latitude,
         longitude: position.coords.longitude
       });
-      this.getMaskData();
+      this.getMaskData(this.state.latitude, this.state.longitude);
     });
   }
 
-  getMaskData = async () => {
+  getMaskData = async (latitude, longitude) => {
     try {
       const {
         data: { stores: maskData }
-      } = await getMaskData(this.state.latitude, this.state.longitude);
+      } = await getMaskData(latitude, longitude);
       this.setState({
         maskData
       });
@@ -41,6 +41,15 @@ export default class extends React.Component {
           center: new kakao.maps.LatLng(this.state.latitude, this.state.longitude),
           level: 4
         });
+        
+        /*kakao.maps.event.addListener(map, 'bounds_changed', function() {
+          let center = map.getCenter();
+          this.setState({
+            latitude: center.getLat(),
+            longitude: center.getLng()
+          });
+          getMaskData(center.getLat(), center.getLng());
+        });*/
         
         //마스크 정보로 마커 생성
         if(this.state.maskData) {
@@ -106,12 +115,11 @@ export default class extends React.Component {
               // 마커 위에 인포윈도우를 표시합니다
               infowindow.open(map, marker);  
             });
-            
-            this.setState({
-              loading: false
-            });
           });
         }
+        this.setState({
+          loading: false
+        });
       });
     }
   };
