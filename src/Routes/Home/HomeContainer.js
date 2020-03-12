@@ -77,6 +77,7 @@ export default class extends React.Component {
           imageSize = new kakao.maps.Size(20, 20), // 마커이미지의 크기입니다
           imageOption = {offset: new kakao.maps.Point(10, 10)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
           
+
           // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
           let markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
               markerPosition = new kakao.maps.LatLng(element.lat, element.lng); // 마커가 표시될 위치입니다
@@ -89,7 +90,7 @@ export default class extends React.Component {
   
           // 마커가 지도 위에 표시되도록 설정합니다
           marker.setMap(map);
-          let iwContent = `<div style="padding:5px;">${element.name}<br>입고시간: ${element.stock_at ? element.stock_at.substr(11, 5) : null}</div>`, // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+          let iwContent = `<div style="padding:5px;">${element.name}<br>입고시간: ${element.stock_at ? element.stock_at.substr(11, 5) : null}<br><a href='https://map.kakao.com/link/to/${element.name},${element.lat},${element.lng}' style="color:blue" target="_blank">길찾기</a></div>`, // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
               iwPosition = new kakao.maps.LatLng(element.lat, element.lng); //인포윈도우 표시 위치입니다
 
           // 인포윈도우를 생성합니다
