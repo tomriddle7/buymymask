@@ -6,7 +6,7 @@ import Loader from "../../Components/Loader";
 const House = styled.div`
   margin-top: 50px;
   width: 100%;
-  height: 400px;
+  height: 100vh;
 `;
 
 const HomePresenter = ({
