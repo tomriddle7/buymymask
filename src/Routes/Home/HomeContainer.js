@@ -4,7 +4,7 @@ import HomePresenter from "./HomePresenter";
 import { throttle } from 'lodash';
 import { getMaskData } from "api";
 
-var map;
+let map;
 
 export default class extends React.Component {
   state = {
