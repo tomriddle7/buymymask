@@ -1,6 +1,7 @@
 /*global kakao*/
 import React from "react";
 import HomePresenter from "./HomePresenter";
+import { throttle } from 'lodash';
 import { getMaskData } from "api";
 
 export default class extends React.Component {
@@ -42,14 +43,14 @@ export default class extends React.Component {
           level: 4
         });
         
-        /*kakao.maps.event.addListener(map, 'bounds_changed', function() {
+        /*kakao.maps.event.addListener(map, 'bounds_changed', throttle(function() {
           let center = map.getCenter();
           this.setState({
             latitude: center.getLat(),
             longitude: center.getLng()
           });
           getMaskData(center.getLat(), center.getLng());
-        });*/
+        }, 1000), false);*/
         
         //마스크 정보로 마커 생성
         if(this.state.maskData) {
@@ -95,7 +96,8 @@ export default class extends React.Component {
             // 마커를 생성합니다
             let marker = new kakao.maps.Marker({
                 position: markerPosition, 
-                image: markerImage // 마커이미지 설정 
+                image: markerImage, // 마커이미지 설정
+                clickable: true
             });
     
             // 마커가 지도 위에 표시되도록 설정합니다
