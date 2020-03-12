@@ -44,26 +44,38 @@ export default class extends React.Component {
         
         //마스크 정보로 마커 생성
         this.state.maskData.forEach(element => {
-          let imageSrc;
+          let imgType, imgStat;
+          switch(element.type) {
+            case "01":
+              imgType = "pill";
+              break;
+            case "02":
+              imgType = "mart";
+              break;
+            case "03":
+              imgType = "post";
+              break;
+          }
           switch(element.remain_stat) {
             case "plenty":
-              imageSrc = require("../../Assets/marker_green.png");
+              imgStat = "green";
               break;
             case "some":
-              imageSrc = require("../../Assets/marker_yellow.png");
+              imgStat = "yellow";
               break;
             case "few":
-              imageSrc = require("../../Assets/marker_red.png");
+              imgStat = "red";
               break;
             case "empty":
-              imageSrc = require("../../Assets/marker_grey.png");
+              imgStat = "grey";
               break;
             default:
-                imageSrc = require("../../Assets/marker_grey.png");
-                break;
+              imgStat = "grey";
+              break;
           }
-          let imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
-          imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+          let imageSrc = require(`../../Assets/marker_${imgType}_${imgStat}.png`),
+          imageSize = new kakao.maps.Size(20, 20), // 마커이미지의 크기입니다
+          imageOption = {offset: new kakao.maps.Point(10, 10)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
           
           // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
           let markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
@@ -77,7 +89,7 @@ export default class extends React.Component {
   
           // 마커가 지도 위에 표시되도록 설정합니다
           marker.setMap(map);
-          let iwContent = `<div style="padding:5px;">${element.name}<br>${element.addr}<br>${element.remain_stat}</div>`, // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+          let iwContent = `<div style="padding:5px;">${element.name}<br>입고시간: ${element.stock_at ? element.stock_at.substr(11, 5) : null}</div>`, // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
               iwPosition = new kakao.maps.LatLng(element.lat, element.lng); //인포윈도우 표시 위치입니다
 
           // 인포윈도우를 생성합니다
