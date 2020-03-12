@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Router from "./Router";
+import Info from "./Info";
 import GlobalStyles from "./GlobalStyles";
 
 class App extends Component {
@@ -7,6 +8,7 @@ class App extends Component {
     return (
       <>
         <Router />
+        <Info />
         <GlobalStyles />
       </>
     );
