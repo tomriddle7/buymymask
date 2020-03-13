@@ -55,10 +55,10 @@ export default class extends React.Component {
               imgType = "pill";
               break;
             case "02":
-              imgType = "mart";
+              imgType = "post";
               break;
             case "03":
-              imgType = "post";
+              imgType = "mart";
               break;
           }
           switch(element.remain_stat) {
