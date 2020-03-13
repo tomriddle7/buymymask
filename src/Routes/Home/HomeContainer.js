@@ -10,8 +10,8 @@ export default class extends React.Component {
   state = {
     latitude: 0,
     longitude: 0,
-    mapData: null,
     maskData: null,
+    markerData: null,
     error: null,
     loading: true
   };
@@ -22,7 +22,7 @@ export default class extends React.Component {
         latitude: position.coords.latitude,
         longitude: position.coords.longitude
       });
-      this.setMap();
+      this.setMapData();
       this.getMaskData(position.coords.latitude, position.coords.longitude);
     });
   }
@@ -40,7 +40,11 @@ export default class extends React.Component {
         error: "Can't find app information."
       });
     } finally {
-
+      /*if(this.state.maskData) {
+        this.state.maskData.forEach(element => {
+          marker.setMap(null);
+        });
+      }*/
       
       //마스크 정보로 마커 생성
       if(this.state.maskData) {
@@ -115,7 +119,7 @@ export default class extends React.Component {
     }
   };
 
-  setMap() {
+  setMapData() {
     kakao.maps.load(() => {
       let el = document.getElementById('map');
       map = new kakao.maps.Map(el, {
