@@ -10,8 +10,8 @@ export default class extends React.Component {
   state = {
     latitude: 0,
     longitude: 0,
-    mapData: null,
     maskData: null,
+    markerData: null,
     error: null,
     loading: true
   };
@@ -22,7 +22,7 @@ export default class extends React.Component {
         latitude: position.coords.latitude,
         longitude: position.coords.longitude
       });
-      this.setMap();
+      this.setMapData();
       this.getMaskData(position.coords.latitude, position.coords.longitude);
     });
   }
@@ -51,10 +51,10 @@ export default class extends React.Component {
               imgType = "pill";
               break;
             case "02":
-              imgType = "mart";
+              imgType = "post";
               break;
             case "03":
-              imgType = "post";
+              imgType = "mart";
               break;
           }
           switch(element.remain_stat) {
@@ -115,7 +115,7 @@ export default class extends React.Component {
     }
   };
 
-  setMap() {
+  setMapData() {
     kakao.maps.load(() => {
       let el = document.getElementById('map');
       map = new kakao.maps.Map(el, {
